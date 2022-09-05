@@ -1,1 +1,3 @@
-console.log('Hello from preload!', document)
+console.log("Hello from preload!", document);
+
+export {};

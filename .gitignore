@@ -1,3 +1,8 @@
-/dist
-/node_modules
-/installation
+# Node Files
+**/node_modules/
+
+# Distribution Files
+**/build/
+
+# Installation Files
+**/installation/

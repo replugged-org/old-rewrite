@@ -1,0 +1,9 @@
+{
+    "ext": "*.*",
+    "exec": "node ./scripts/build.mjs",
+    "ignore": [
+        "./build/",
+        "./.git/",
+        "./node_modules/"
+    ]
+}

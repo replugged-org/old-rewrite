@@ -1,5 +1,22 @@
 {
   "compilerOptions": {
-    "lib": ["ES2021", "DOM"]
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "checkJs": false,
+    "noEmit": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "types": [
+      "electron"
+    ],
+    "lib": [
+      "ES2022",
+      "DOM"
+    ],
+    "baseUrl": ".",
   }
 }

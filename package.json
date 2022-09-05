@@ -1,22 +1,27 @@
 {
   "name": "replugged",
   "version": "0.0.1",
-  "description": "",
+  "description": "A Discord modification that allows loading custom plugins & themes.",
   "scripts": {
-    "build": "node scripts/build",
-    "dev": "node scripts/dev"
+    "build": "node ./build.mjs",
+    "dev": "nodemon"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/replugged-org/replugged-rewrite.git"
   },
-  "keywords": [],
+  "keywords": [
+    "discord",
+    "electron",
+    "typescript",
+    "modification"
+  ],
   "author": "Replugged",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^18.7.14",
-    "chokidar": "^3.5.3",
     "electron": "^17.4.11",
-    "esbuild": "^0.15.7"
+    "esbuild": "^0.15.7",
+    "nodemon": "^2.0.19"
   }
 }

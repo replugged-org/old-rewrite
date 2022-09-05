@@ -1,23 +1,29 @@
-import { Module } from 'node:module'
-import { join, dirname } from 'node:path'
-import electron from 'electron'
-import ProxiedWindow from './browserWindow'
+import electron, { app } from "electron";
+import Module from "module";
+import { join } from "path";
+import ProxiedWindow from "./ProxiedWindow";
 
-if (!require.main) throw new Error('Cannot find main NodeJS Module.')
+/**
+ * Electron BrowserWindow patch.
+ */
 
-const ELECTRON_PATH = require.resolve('electron')
-const DISCORD_PATH = join(dirname(require.main.filename), '..', 'app.asar')
+const ELECTRON_PATH = require.resolve("electron");
 
-const electronCache = require.cache[ELECTRON_PATH]
-require.main.filename = join(DISCORD_PATH, 'app_bootstrap/index.js')
+delete require.cache[ELECTRON_PATH].exports;
+require.cache[ELECTRON_PATH].exports = { ...electron, BrowserWindow: ProxiedWindow };
 
-if (!electronCache) throw new Error('No module cache entry for "electron"')
+/**
+ * Load Discord.
+ */
 
-// This is a getter so we cannot overwrite it.
-delete electronCache.exports
-electronCache.exports = { ...electron, BrowserWindow: ProxiedWindow }
+const APP_PATH = join(process.resourcesPath, "app.asar");
 
-const discordPackage = require(join(DISCORD_PATH, 'package.json'))
+// If this fails, the error will be enough context.
+const { name, main } = require(join(APP_PATH, "package.json"));
 
 // @ts-ignore
-Module._load(join(discordPath, discordPackage.main), null, true)
+app.setAppPath?.(APP_PATH);
+app.name = name;
+
+// @ts-ignore
+Module._load(join(APP_PATH, main), null, 0);

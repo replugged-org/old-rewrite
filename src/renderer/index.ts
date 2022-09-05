@@ -1,3 +1,9 @@
-import window from './window'
+declare global {
+    interface Window {
+        webpackChunkdiscord_app: any;
+    }
+}
 
-console.log('Hello from renderer!', window.webpackChunkdiscord_app)
+console.log("Hello from renderer!", window.webpackChunkdiscord_app);
+
+export {};
