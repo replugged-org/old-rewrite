@@ -1,16 +1,14 @@
 {
-  "compilerOptions": {
-    "target": "ES2022",
-    "module": "ES2022",
-    "moduleResolution": "classic",
-    "checkJs": false,
-    "noEmit": true,
-    "isolatedModules": true,
-    "skipLibCheck": true,
-    "lib": [
-      "ES2022",
-      "DOM"
-    ],
-    "baseUrl": ".",
-  }
+    "compilerOptions": {
+        "target": "ES2022",
+        "module": "ES2022",
+        "moduleResolution": "classic",
+        "checkJs": false,
+        "noEmit": true,
+        "isolatedModules": true,
+        "skipLibCheck": true,
+        "lib": ["ES2022", "DOM"],
+        "types": [],
+        "baseUrl": "."
+    }
 }

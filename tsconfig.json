@@ -1,22 +1,17 @@
 {
-  "compilerOptions": {
-    "target": "ES2022",
-    "module": "CommonJS",
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "checkJs": false,
-    "noEmit": true,
-    "isolatedModules": true,
-    "skipLibCheck": true,
-    "types": [
-      "node",
-      "electron"
-    ],
-    "lib": [
-      "ES2022"
-    ],
-    "baseUrl": "src/main",
-  }
+    "compilerOptions": {
+        "target": "ES2022",
+        "module": "CommonJS",
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "checkJs": false,
+        "noEmit": true,
+        "isolatedModules": true,
+        "skipLibCheck": true,
+        "types": ["node", "electron"],
+        "lib": ["ES2022"],
+        "baseUrl": "src/main"
+    }
 }
