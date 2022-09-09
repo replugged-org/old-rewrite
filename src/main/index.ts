@@ -1,4 +1,5 @@
 import electron from "electron";
+import Replugged from "Replugged";
 import ProxiedWindow from "./ProxiedWindow";
 
 export function start(loadDiscord: CallableFunction) {
@@ -12,6 +13,10 @@ export function start(loadDiscord: CallableFunction) {
 
     delete require.cache[ELECTRON_PATH].exports;
     require.cache[ELECTRON_PATH].exports = { ...electron, BrowserWindow: ProxiedWindow };
+
+    const replugged = new Replugged();
+
+    replugged.init();
 
     loadDiscord();
 }

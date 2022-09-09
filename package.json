@@ -26,5 +26,8 @@
     "esbuild": "^0.15.7",
     "esbuild-plugin-replace": "^1.2.0",
     "nodemon": "^2.0.19"
+  },
+  "dependencies": {
+    "mime-types": "^2.1.35"
   }
 }
