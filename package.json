@@ -4,7 +4,9 @@
   "description": "A Discord modification that allows loading custom plugins & themes.",
   "scripts": {
     "build": "node ./build.mjs",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "dev:build": "node ./build.mjs --dev",
+    "dev:install": "node ./devInstall.mjs"
   },
   "repository": {
     "type": "git",
@@ -22,6 +24,7 @@
     "@types/node": "^18.7.14",
     "electron": "^17.4.11",
     "esbuild": "^0.15.7",
+    "esbuild-plugin-replace": "^1.2.0",
     "nodemon": "^2.0.19"
   }
 }

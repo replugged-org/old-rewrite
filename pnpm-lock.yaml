@@ -4,12 +4,14 @@ specifiers:
   '@types/node': ^18.7.14
   electron: ^17.4.11
   esbuild: ^0.15.7
+  esbuild-plugin-replace: ^1.2.0
   nodemon: ^2.0.19
 
 devDependencies:
   '@types/node': 18.7.15
   electron: 17.4.11
   esbuild: 0.15.7
+  esbuild-plugin-replace: 1.2.0
   nodemon: 2.0.19
 
 packages:
@@ -424,6 +426,12 @@ packages:
     dev: true
     optional: true
 
+  /esbuild-plugin-replace/1.2.0:
+    resolution: {integrity: sha512-dYlDwjcKKgAi8fqsvLwDvO+03asnp1qyG4VU/qbvg061CIMfecF/qwkjr4QRetQP9Os2nJuNO95Y0rUUXhFAwg==}
+    dependencies:
+      magic-string: 0.25.9
+    dev: true
+
   /esbuild-sunos-64/0.15.7:
     resolution: {integrity: sha512-8CDI1aL/ts0mDGbWzjEOGKXnU7p3rDzggHSBtVryQzkSOsjCHRVe0iFYUuhczlxU1R3LN/E7HgUO4NXzGGP/Ag==}
     engines: {node: '>=12'}
@@ -744,6 +752,12 @@ packages:
     dev: true
     optional: true
 
+  /magic-string/0.25.9:
+    resolution: {integrity: sha512-RmF0AsMzgt25qzqqLc1+MbHmhdx0ojF2Fvs4XnOqz2ZOBXzzkEwc/dJQZCYHAn7v1jbVOjAZfK8msRn4BxO4VQ==}
+    dependencies:
+      sourcemap-codec: 1.4.8
+    dev: true
+
   /matcher/3.0.0:
     resolution: {integrity: sha512-OkeDaAZ/bQCxeFAozM55PKcKU0yJMPGifLwV4Qgjitu+5MoAfSQN4lsLJeXZ1b8w0x+/Emda6MZgXS1jvsapng==}
     engines: {node: '>=10'}
@@ -972,6 +986,10 @@ packages:
     engines: {node: '>=8.10.0'}
     dependencies:
       semver: 7.0.0
+    dev: true
+
+  /sourcemap-codec/1.4.8:
+    resolution: {integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==}
     dev: true
 
   /sprintf-js/1.1.2:

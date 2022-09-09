@@ -1,9 +1,11 @@
 {
-    "ext": "*.*",
-    "exec": "node ./scripts/build.mjs",
+    "$schema": "https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/nodemon.json",
+    "ext": "*",
+    "exec": "node ./build.mjs --dev",
     "ignore": [
         "./build/",
         "./.git/",
-        "./node_modules/"
+        "./node_modules/",
+        "./installation/"
     ]
 }
