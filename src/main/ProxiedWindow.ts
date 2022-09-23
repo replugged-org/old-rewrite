@@ -9,6 +9,11 @@ export enum Environment {
     Overlay = 4,
 }
 
+export type WindowContext = {
+    env: Environment;
+    discordPreload: string;
+};
+
 export function getEnvironment(options: BrowserWindowConstructorOptions) {
     switch (true) {
         case "webContents" in options:
@@ -26,16 +31,28 @@ export function getEnvironment(options: BrowserWindowConstructorOptions) {
     }
 }
 
+export const windowContexts = new Map<BrowserWindow, WindowContext>();
+
 const ProxiedWindow = new Proxy(BrowserWindow, {
-    construct(target, [winOpts]: [BrowserWindowConstructorOptions], _) {
+    construct(target, [winOpts]: [BrowserWindowConstructorOptions]) {
         const env = getEnvironment(winOpts);
 
+        const winCtx: WindowContext = {
+            env,
+            discordPreload: null,
+        };
+
         if (env === Environment.Client) {
-            // TODO: store original preload
+            winCtx.discordPreload = winOpts.webPreferences!.preload;
             winOpts.webPreferences!.preload = join(__dirname, "preload.js");
         }
 
-        return new target(winOpts);
+        const win = new target(winOpts);
+
+        windowContexts.set(win, winCtx);
+        win.once("closed", () => windowContexts.delete(win));
+
+        return win;
     },
 });
 
