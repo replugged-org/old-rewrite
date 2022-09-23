@@ -56,6 +56,7 @@ const BUILD_OPTIONS = [
         entryPoints: ["./src/preload"],
         platform: "node",
         target: ["node" + NODE_VERSION, "chrome" + CHROME_VERSION],
+        sourcemap: "inline",
         outfile: "build/preload.js",
         external: ["electron"],
     },
