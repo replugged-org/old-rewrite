@@ -28,6 +28,7 @@
     "nodemon": "^2.0.19"
   },
   "dependencies": {
+    "eventemitter3": "^4.0.7",
     "mime-types": "^2.1.35"
   }
 }

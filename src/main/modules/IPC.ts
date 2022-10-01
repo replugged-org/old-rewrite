@@ -1,23 +1,37 @@
-import { BrowserWindow, ipcMain } from "electron";
+import type Replugged from "Replugged";
+import { BrowserWindow, ipcMain, webContents } from "electron";
 import { windowContexts } from "ProxiedWindow";
 import { MainEvent } from "../../constants";
+import Channel from "../../lib/Channel";
 
 export default class IPCMain {
-    init() {
-        this.registerEvents();
-        this.registerCallers();
+    _rp: Replugged;
+    channel = new Channel("main");
+    winRef: WeakRef<BrowserWindow>;
+
+    constructor(rp: Replugged) {
+        this._rp = rp;
+        this.init();
     }
 
-    registerEvents() {
-        ipcMain.on("messageMain", (event, channel, ...args) => {
-            // TODO
-        });
+    init() {
         ipcMain.on(MainEvent.GetDiscordPreload, (event) => {
             const win = BrowserWindow.fromWebContents(event.sender);
+            this.winRef = new WeakRef(win);
+
             event.returnValue = windowContexts.get(win)?.discordPreload;
         });
+        this.initChannel();
     }
-    registerCallers() {
-        // TODO: nonce-based implementation (main -> renderer)
+    initChannel() {
+        this.channel.setLogger(console);
+        this.channel.addPipe({
+            emit: (event, ...data) => {
+                this.winRef.deref()?.webContents.send(event, ...data);
+            },
+            listen: (event: string, callback) => {
+                ipcMain.on(event, (evt, ...data) => callback(...data));
+            },
+        });
     }
 }

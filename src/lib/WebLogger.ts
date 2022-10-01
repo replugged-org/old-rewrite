@@ -13,6 +13,7 @@ export default class Logger {
         this.scopes = scopes;
     }
 
+    // TODO: support format strings
     log(...args: any[]) {
         console.log(...this.getScopedArgs(), ...args);
     }
@@ -23,8 +24,8 @@ export default class Logger {
         console.error(...this.getScopedArgs(), ...args);
     }
 
-    createLogger(scopes: Scope[], trim = 0) {
-        return new Logger([...this.scopes.slice(-trim), ...scopes]);
+    createLogger(scopes: Scope | Scope[], trim = 0) {
+        return new Logger([...this.scopes.slice(-trim), ...[scopes].flat()]);
     }
     serialize() {
         return JSON.stringify(this.scopes);
@@ -33,7 +34,7 @@ export default class Logger {
         return new Logger(JSON.parse(data));
     }
 
-    // TODO: increase readability
+    // TODO: increase readability of the methods below
     getEdges(scope: Scope): [boolean, boolean] {
         const isLeftEdge = scope === this.scopes[0];
         const isRightEdge = scope === this.scopes[this.scopes.length - 1];

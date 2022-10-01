@@ -1,37 +1,52 @@
+import logger from "logger";
+import Channel from "../../lib/Channel";
+
 const { RepluggedNative: native } = window;
 
-// TODO: increase security later by serializing namespaced channels, and putting the namespacing inside preload
-// Eg: "namespace:somethingHappened" -> "bmFtZXNwYWNl:c29tZXRoaW5nSGFwcGVuZWQ"
+const ipcLogger = logger.createLogger({
+    name: "IPC",
+});
+
+const channel = new Channel("renderer");
+channel.setLogger(ipcLogger);
+channel.addPipe(native.ipc.pipe);
+// Handshake will bubble up to main channel
+channel.handshakeAll();
 
 export class NamespacedIPC {
-    __namespace: string;
+    namespace: string;
 
     constructor(namespace: string) {
-        this.__namespace = namespace;
-    }
-
-    static create(namespace: string) {
-        return new NamespacedIPC(namespace);
-    }
-    create(namespace: string) {
-        return new NamespacedIPC(namespace);
+        this.namespace = namespace;
     }
 
     on(event: string, listener: (...args: any[]) => void) {
-        native.ipc.on(`${this.__namespace}:${event}`, listener);
+        channel.on(`${this.namespace}:${event}`, listener);
         return this;
     }
     once(event: string, listener: (...args: any[]) => void) {
-        native.ipc.once(`${this.__namespace}:${event}`, listener);
+        channel.once(`${this.namespace}:${event}`, listener);
         return this;
     }
     off(event: string, listener: (...args: any[]) => void) {
-        native.ipc.off(`${this.__namespace}:${event}`, listener);
+        channel.off(`${this.namespace}:${event}`, listener);
         return this;
     }
-    send(event: string, ...args: any[]) {
-        native.ipc.send(`${this.__namespace}:${event}`, ...args);
+    send(event: string, data: any) {
+        channel.send({
+            name: `${this.namespace}:${event}`,
+            destination: "main",
+            data,
+        });
     }
+    // TODO: callers
 }
 
-export default new NamespacedIPC("renderer");
+export default {
+    create(namespace: string) {
+        return new NamespacedIPC(namespace);
+    },
+    get channel() {
+        return channel;
+    },
+};

@@ -1,4 +1,4 @@
-import type Replugged from "../Replugged";
+import type Replugged from "Replugged";
 import { app, protocol, ProtocolRequest, ProtocolResponse } from "electron";
 import mime from "mime-types";
 import { readFile } from "fs/promises";
@@ -22,13 +22,13 @@ export type Request = Omit<ProtocolRequest, "url"> & {
 };
 
 class Protocol {
-    __rp: Replugged;
+    _rp: Replugged;
 
     /** Maps virtual paths to file paths */
     staticPaths = new Map<string, string>();
 
     constructor(replugged: Replugged) {
-        this.__rp = replugged;
+        this._rp = replugged;
 
         this.init();
     }

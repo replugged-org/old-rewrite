@@ -5,10 +5,12 @@ specifiers:
   electron: ^17.4.11
   esbuild: ^0.15.7
   esbuild-plugin-replace: ^1.2.0
+  eventemitter3: ^4.0.7
   mime-types: ^2.1.35
   nodemon: ^2.0.19
 
 dependencies:
+  eventemitter3: 4.0.7
   mime-types: 2.1.35
 
 devDependencies:
@@ -506,6 +508,10 @@ packages:
     engines: {node: '>=10'}
     dev: true
     optional: true
+
+  /eventemitter3/4.0.7:
+    resolution: {integrity: sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==}
+    dev: false
 
   /extract-zip/1.7.0:
     resolution: {integrity: sha512-xoh5G1W/PB0/27lXgMQyIhP5DSY/LhoCsOyZgb+6iMmRtCwVBo55uKaMoEYrDCKQhWvqEip5ZPKAc6eFNyf/MA==}

@@ -1,7 +1,7 @@
 import { contextBridge, ipcRenderer } from "electron";
-import RepluggedBridge from "./RepluggedBridge";
-import createRepluggedNative from "./native/RepluggedNative";
-import logger from "./logger";
+import RepluggedBridge from "RepluggedBridge";
+import createRepluggedNative from "native";
+import logger from "logger";
 import { MainEvent } from "../constants";
 
 logger.log("Hello from preload!", document);
@@ -21,6 +21,8 @@ async function injectRenderer() {
 
 async function initBridge() {
     const rp = new RepluggedBridge();
+
+    Object.defineProperty(globalThis, "replugged", { value: rp });
 
     contextBridge.exposeInMainWorld("RepluggedNative", createRepluggedNative(rp));
 }
